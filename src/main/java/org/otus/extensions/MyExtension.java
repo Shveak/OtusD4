@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.otus.annotations.Driver;
 import org.otus.driver.WebDriverFactory;
+import org.otus.listeners.Mouse;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -21,7 +22,7 @@ public class MyExtension implements BeforeEachCallback, AfterEachCallback {
 
     @Override
     public void afterEach(ExtensionContext context) throws Exception {
-        if (driver != null && Boolean.getBoolean(System.getProperty("webdriver.close.on.tear.down", "true"))) {
+        if (driver != null) {
             driver.close();
             driver.quit();
         }
@@ -30,6 +31,7 @@ public class MyExtension implements BeforeEachCallback, AfterEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) throws Exception {
         driver = new WebDriverFactory().getDriver();
+        driver.register(new Mouse());
         getAnnotatedFields(Driver.class, context).forEach(x -> {
             if (x.getType().getName().equals(WebDriver.class.getName())) {
                 x.setAccessible(true);
@@ -41,6 +43,7 @@ public class MyExtension implements BeforeEachCallback, AfterEachCallback {
             }
         });
     }
+
     private List<Field> getAnnotatedFields(Class<? extends Annotation> annotation, ExtensionContext context) {
         List<Field> list = new ArrayList<>();
         Class<?> clazz = context.getTestClass().get();
