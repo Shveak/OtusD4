@@ -27,7 +27,7 @@ public class CourseOnMainPage {
     @Test
     @DisplayName("Выбираем курс по наименованию")
     public void findCourse() {
-        checkBannerCourse(System.getProperty("otus.course", "Специализация Системный аналитик"));
+        checkBannerCourse("Специализация Python");
     }
 
     @Test
