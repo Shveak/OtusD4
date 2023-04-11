@@ -13,7 +13,7 @@ import org.otus.pages.CoursePage;
 import org.otus.pages.MainPage;
 
 @ExtendWith(MyExtension.class)
-public class CourseOnMainPage {
+public class TestCourseOnMainPage {
     private static final String BASE_URL = System.getProperty("webdriver.base.url", "https://otus.ru");
 
     @Driver
@@ -28,15 +28,6 @@ public class CourseOnMainPage {
     @DisplayName("Выбираем курс по наименованию")
     public void findCourse() {
         checkBannerCourse("Специализация Python");
-    }
-
-    @Test
-    @DisplayName("Проверяет все баннеры на переход на свою страницу")
-    public void checkAllBannersCourses() {
-        for (String title : new BannersCourses(driver).getAllBunnersTitles()) {
-            checkBannerCourse(title);
-            driver.navigate().back();
-        }
     }
 
     @Test

@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BannersCourses extends BaseComponentAbs {
@@ -73,10 +72,6 @@ public class BannersCourses extends BaseComponentAbs {
 
     public String getAttribute(String str) {
         return getCurrentBanner().getAttribute(str);
-    }
-
-    public List<String> getAllBunnersTitles() {
-        return listBanner.stream().map(this::getTitle).collect(Collectors.toList());
     }
 
     private WebElement getCurrentBanner() {
