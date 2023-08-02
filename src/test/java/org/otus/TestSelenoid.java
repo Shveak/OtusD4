@@ -11,7 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class TestSelenoid {
-    private WebDriver driver;
+    private WebDriver driver110;
+    private WebDriver driver112;
 
     @Before
     public void init() throws MalformedURLException {
@@ -19,57 +20,63 @@ public class TestSelenoid {
         capabilities.setCapability("browserName", "chrome");
         capabilities.setCapability("browserVersion", "110.0");
         capabilities.setCapability("enableVNC", true);
-        driver = new RemoteWebDriver(new URL(System.getProperty("webdriver.base.url")), capabilities);
+        driver110 = new RemoteWebDriver(new URL(System.getProperty("webdriver.base.url")), capabilities);
+        capabilities.setCapability("browserVersion", "112.0");
+        driver112 = new RemoteWebDriver(new URL(System.getProperty("webdriver.base.url")), capabilities);
     }
 
     @After
     public void tearDown() {
-        if (driver != null) {
-            driver.close();
-            driver.quit();
+        if (driver110 != null) {
+            driver110.close();
+            driver110.quit();
+        }
+        if (driver112 != null) {
+            driver112.close();
+            driver112.quit();
         }
     }
 
     @Test
     public void test1() throws InterruptedException {
-        driver.get("http://localhost:8080");
+        driver110.get("http://127.0.0.1:8080");
 
         Thread.sleep(50000);
     }
 
     @Test
     public void test2() throws InterruptedException {
-        driver.get("http://localhost:8080");
+        driver110.get("http://localhost:8080");
         Thread.sleep(50000);
     }
 
     @Test
     public void test3() throws InterruptedException {
-        driver.get("http://localhost:8080");
+        driver112.get("http://localhost:8080");
         Thread.sleep(50000);
     }
 
     @Test
     public void test4() throws InterruptedException {
-        driver.get("http://localhost:8080");
+        driver112.get("http://localhost:8080");
         Thread.sleep(50000);
     }
 
     @Test
     public void test5() throws InterruptedException {
-        driver.get("https://ya.ru");
+        driver110.get("https://ya.ru");
         Thread.sleep(50000);
     }
 
     @Test
     public void test6() throws InterruptedException {
-        driver.get("https://ya.ru");
+        driver110.get("https://ya.ru");
         Thread.sleep(50000);
     }
 
     @Test
     public void test7() throws InterruptedException {
-        driver.get("https://ya.ru");
+        driver112.get("https://ya.ru");
         Thread.sleep(50000);
     }
 }
